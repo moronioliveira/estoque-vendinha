@@ -5,6 +5,7 @@ import com.moroni.estoque_vendinha.infraestructure.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,4 +21,19 @@ public Produto salvarProduto(Produto produto){
     }
     return repository.save(produto);
 }
+    //Metodo read
+    public List<Produto> listarTodos(){
+    return repository.findAll();
+    }
+
+    //Metodo update
+    public Produto atualizar (Long id, Produto produtoAtualizado){
+    Produto produtoExistente = repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+    produtoExistente.setId(produtoAtualizado.getId());
+    produtoExistente.setName(produtoAtualizado.getName());
+    produtoExistente.setPrice(produtoAtualizado.getPrice());
+    produtoExistente.setStockeQuantity(produtoAtualizado.getStockeQuantity());
+    return repository.save(produtoExistente);
+    }
 }
