@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/Produtos")
+@RequestMapping("/produtos")
 public class ProdutoController {
     private final ProdutoService service;
 
@@ -26,6 +26,16 @@ public class ProdutoController {
     public ResponseEntity<List<Produto>> listarTodos(){
     List<Produto> produtos = service.listarTodos();
     return ResponseEntity.ok(produtos);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> atualiza(@PathVariable Long id, @RequestBody Produto produto){
+    Produto atualizado = service.atualizar(id, produto);
+    return ResponseEntity.ok(atualizado);
+    }
+    @DeleteMapping
+    public ResponseEntity<Void> deletar (@PathVariable Long id){
+    service.deletar(id);
+    return ResponseEntity.noContent().build();
     }
 
 }
