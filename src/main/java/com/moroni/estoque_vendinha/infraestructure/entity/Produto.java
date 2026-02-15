@@ -21,5 +21,5 @@ public class Produto {
     private Long id;
     private String name;
     private BigDecimal price;
-    private Integer stockeQuantity;
+    private Integer stockQuantity;
 }
